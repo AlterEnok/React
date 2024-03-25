@@ -1,0 +1,1 @@
+!function(e){var t=document.createElement("div");t.classList.add("greeting");var n=document.createElement("h1");n.classList.add("greeting__title"),n.textContent="Hello, world!";var a=document.createElement("p");a.classList.add("greeting__text"),a.textContent="I am learning React",t.append(n,a),e.append(t)}(document.querySelector("#root"));
