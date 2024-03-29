@@ -37,7 +37,7 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 { from: './src/index.scss', to: 'styles.css' },
-                { from: './src/search.scss', to: 'search.scss' },
+                { from: './src/Search.scss', to: 'Search.scss' },
             ],
         }),
     ],
