@@ -5,6 +5,6 @@ import Greeting from './Greeting';
 const rootElement = document.getElementById('root');
 
 ReactDOM.render(
-    <Greeting firstName="John" lastName="Doe" birthDate={new Date('2005-01-01')} />,
+    <Greeting firstName="John" lastName="Doe" birthDate={new Date(2005, 0, 1)} />,
     rootElement
 );
