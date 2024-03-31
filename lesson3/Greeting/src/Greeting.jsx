@@ -1,24 +1,23 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 const Greeting = ({ firstName, lastName, birthDate }) => {
-    const calculateAge = (birthDate) => {
-        const today = new Date();
-        const dob = new Date(birthDate);
-        let age = today.getFullYear() - dob.getFullYear();
-        const monthDiff = today.getMonth() - dob.getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate)) {
-            age--;
-        }
-        return age;
-    };
+    const today = new Date();
+    const age = today.getFullYear() - birthDate.getFullYear();
 
-    const age = calculateAge(birthDate);
+
+    if (today < new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate())) {
+        age--;
+    }
 
     return (
-        <div className="greeting">
-            My name is {firstName} {lastName}. I am {birthDate} years old.
-        </div>
+        <div className="greeting">My name is {firstName} {lastName}. I am {age} years old.</div>
     );
 };
 
+const rootElement = document.getElementById('root');
+ReactDOM.render(
+    <Greeting firstName="John" lastName="Doe" birthDate={new Date('2005-12-31')} />,
+    rootElement
+);
 export default Greeting;
