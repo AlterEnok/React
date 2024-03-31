@@ -16,7 +16,7 @@ const Greeting = ({ firstName, lastName, birthDate }) => {
 
     return (
         <div className="greeting">
-            My name is {firstName} {lastName}. I am {age} years old.
+            My name is {firstName} {lastName}. I am {birthDate} years old.
         </div>
     );
 };
