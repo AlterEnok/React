@@ -3,7 +3,7 @@ import React from 'react';
 function Greeting(props) {
     const { firstName, lastName, birthDate } = props;
     const age = calculateAge(birthDate);
-    const greetingText = `My name is ${firstName} ${lastName}. I am ${age} years old.`;
+    const greetingText = `My name is ${firstName} ${lastName}. I am ${age} years old`;
 
     return (
         <div className="greeting">
