@@ -4,7 +4,7 @@ class GoodButton extends React.Component {
 
     handleClick(e) {
 
-        alert(`Good job! ${e.target.textContent}`);
+        alert(e.target.textContent);
     }
 
     render() {
