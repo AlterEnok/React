@@ -20,7 +20,7 @@ class Page extends Component {
             <div className="page">
                 <Info info={this.state.info} />
                 <div className="actions">
-                    <button className="btn" onClick={() => this.setInfo('IPhone 13 - Price is 500$. Available in 2 colors')} >Info 1</button>
+                    <button className="btn" onClick={() => this.setInfo('Price is 500$. Available in 2 colors')} >Info 1</button>
                     <button className="btn" onClick={() => this.setInfo('Price is 650$. Not available')}>Info 2</button>
                     <button className="btn" onClick={() => this.setInfo('')}>Clear</button>
                 </div>
