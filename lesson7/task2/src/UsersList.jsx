@@ -1,5 +1,6 @@
-import React from 'react';
+
 import User from './User';
+import React, { Component } from 'react';
 
 class UsersList extends Component {
     state = {
@@ -21,7 +22,7 @@ class UsersList extends Component {
         if (this.state.sorting) {
             usersList = this.props.users.slice()
                 .sort((a, b) => this.state.sorting === 'asc'
-                    ? a.age - b.age : b.age - a.ge);
+                    ? a.age - b.age : b.age - a.age);
         } else {
             usersList = this.props.users;
         }
