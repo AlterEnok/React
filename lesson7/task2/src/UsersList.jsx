@@ -1,40 +1,39 @@
-
-import User from './User';
 import React, { Component } from 'react';
+import User from './User';
 
 class UsersList extends Component {
     state = {
         sorting: null,
+        users: this.props.users,
     };
-
 
     toggleSorting = () => {
         const newSorting = this.state.sorting === 'asc'
             ? 'desc'
             : 'asc';
+        const sortedUsers = this.props.users.slice().sort((a, b) => {
+            if (newSorting === 'asc') {
+                return a.age - b.age;
+            } else {
+                return b.age - a.age;
+            }
+        });
         this.setState({
             sorting: newSorting,
+            users: sortedUsers,
         });
-    }
+    };
 
     render() {
-        let usersList;
-        if (this.state.sorting) {
-            usersList = this.props.users.slice()
-                .sort((a, b) => this.state.sorting === 'asc'
-                    ? a.age - b.age : b.age - a.age);
-        } else {
-            usersList = this.props.users;
-        }
+        let usersList = this.state.users;
 
         return (
             <div>
-                <button className="btn" onClick={this.toggleSorting}>{
-                    this.state.sorting || '-'}
+                <button className="btn" onClick={this.toggleSorting}>
+                    {this.state.sorting === 'asc' ? 'Age' : this.state.sorting === 'desc' ? 'Age' : '-'}
                 </button>
-
                 <ul className="users">
-                    {this.props.users.map(user => (
+                    {usersList.map(user => (
                         <User key={user.id} {...user} />
                     ))}
                 </ul>
@@ -42,8 +41,5 @@ class UsersList extends Component {
         );
     }
 }
-
-
-
 
 export default UsersList;
