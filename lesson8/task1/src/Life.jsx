@@ -24,9 +24,9 @@ class Life extends Component {
         console.log('componentWillUnmount(): cleanup before DOM related to component will be removed');
     }
 
-
     render() {
-        return <div className='number'>{this.props.number}</div>
+        console.log('return React element to build DOM');
+        return <div className='number'>{this.props.number}</div>;
     }
 }
 
