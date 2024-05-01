@@ -1,31 +1,26 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Clock from './Clock';
 
-class App extends Component {
-    state = {
-        visible: true,
+const App = () => {
+    const cities = [
+        { name: 'London', offset: 0 },
+        { name: 'Kyiv', offset: 2 },
+        { name: 'New York', offset: -5 }
+    ];
+    const [visible, setVisible] = useState(true);
+
+    const toggleClocks = () => {
+        setVisible(!visible);
     };
 
-    toggle = () => {
-        this.setState({
-            visible: !this.state.visible,
-        });
-    };
-
-    render() {
-        return (
-            <div>
-                <button onClick={this.toggle}>Toggle</button>
-                {this.state.visible && (
-                    <div>
-                        <Clock location="London" offset={0} />
-                        <Clock location="Kyiv" offset={2} />
-                        <Clock location="New York" offset={-5} />
-                    </div>
-                )}
-            </div>
-        );
-    }
-}
+    return (
+        <div>
+            <button onClick={toggleClocks}>Toggle</button>
+            {visible && cities.map(city => (
+                <Clock key={city.name} location={city.name} offset={city.offset} />
+            ))}
+        </div>
+    );
+};
 
 export default App;
