@@ -23,9 +23,9 @@ class Clock extends Component {
     render() {
         const { location, offset } = this.props;
         const localDate = new Date(this.state.date.getTime() + offset * 3600000);
-        const hours = localDate.getUTCHours();
-        const minutes = localDate.getUTCMinutes();
-        const seconds = localDate.getUTCSeconds();
+        const hours = (localDate.getUTCHours() + offset + 24) % 24;
+        const minutes = localDate.getMinutes();
+        const seconds = localDate.getSeconds();
         const ampm = hours >= 12 ? 'PM' : 'AM';
 
         return (
