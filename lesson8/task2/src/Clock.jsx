@@ -4,14 +4,14 @@ class Clock extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: this.calculateTime(),
+            date: new Date(),
         };
     }
 
     componentDidMount() {
         this.interval = setInterval(() => {
             this.setState({
-                date: this.calculateTime(),
+                date: new Date(),
             });
         }, 1000);
     }
@@ -20,34 +20,22 @@ class Clock extends Component {
         clearInterval(this.interval);
     }
 
-    calculateTime() {
-        const { offset } = this.props;
-        const currentDate = new Date();
-        const utc = currentDate.getTime() + (currentDate.getTimezoneOffset() * 60000);
-        const newDate = new Date(utc + (3600000 * offset));
-
-        return newDate;
-    }
-
-    formatTime(date) {
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const seconds = date.getSeconds();
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        const formattedHours = hours % 12 || 12;
-
-        return `${formattedHours}:${this.formatDigit(minutes)}:${this.formatDigit(seconds)} ${ampm}`;
-    }
-
-    formatDigit(digit) {
-        return digit < 10 ? `0${digit}` : digit;
-    }
-
     render() {
+        const { location, offset } = this.props;
+        const localDate = new Date(this.state.date.getTime() + offset * 3600000);
+        const hours = localDate.getHours();
+        const minutes = localDate.getMinutes();
+        const seconds = localDate.getSeconds();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+
         return (
-            <div className='clock'>
-                <div className='clock__location'>{this.props.location}</div>
-                <div className='clock__time'>{this.formatTime(this.state.date)}</div>
+            <div className="clock">
+                <div className="clock__location">
+                    {location}
+                </div>
+                <div className="clock__time">
+                    {`${hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds} ${ampm}`}
+                </div>
             </div>
         );
     }
