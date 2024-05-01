@@ -33,8 +33,10 @@ class Clock extends Component {
         const hours = date.getHours();
         const minutes = date.getMinutes();
         const seconds = date.getSeconds();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        const formattedHours = hours % 12 || 12;
 
-        return `${this.formatDigit(hours)}:${this.formatDigit(minutes)}:${this.formatDigit(seconds)}`;
+        return `${formattedHours}:${this.formatDigit(minutes)}:${this.formatDigit(seconds)} ${ampm}`;
     }
 
     formatDigit(digit) {
