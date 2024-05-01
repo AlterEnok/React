@@ -1,29 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 
-const Clock = ({ location, offset }) => {
-    const [time, setTime] = useState(new Date());
+class Clock extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: new Date(),
+        };
+    }
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTime(new Date());
+    componentDidMount() {
+        this.interval = setInterval(() => {
+            this.setState({
+                date: new Date(),
+            });
         }, 1000);
+    }
 
-        return () => clearInterval(interval);
-    }, []);
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
 
-    const formattedTime = new Date(time.getTime() + offset * 3600 * 1000)
-        .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    render() {
+        const { location, offset } = this.props;
+        const localDate = new Date(this.state.date.getTime() + offset * 3600000);
+        const hours = localDate.getUTCHours();
+        const minutes = localDate.getUTCMinutes();
+        const seconds = localDate.getUTCSeconds();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
 
-    return (
-        <div className="clock">
-            <div className="clock__location">
-                {location}
+        return (
+            <div className="clock">
+                <div className="clock__location">
+                    {location}
+                </div>
+                <div className="clock__time">
+                    {`${hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds} ${ampm}`}
+                </div>
             </div>
-            <div className="clock__time">
-                {formattedTime}
-            </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 export default Clock;
