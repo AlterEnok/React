@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import Clock from './Clock';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            visible: true,
-        };
-    }
+    state = {
+        visible: true,
+    };
 
     toggle = () => {
         this.setState({
@@ -19,15 +16,13 @@ class App extends Component {
         return (
             <div>
                 <button onClick={this.toggle}>Toggle</button>
-                <div>
-                    {this.state.visible && (
-                        <>
-                            <Clock location="London" offset={0} />
-                            <Clock location="Kyiv" offset={2} />
-                            <Clock location="New York" offset={-5} />
-                        </>
-                    )}
-                </div>
+                {this.state.visible && (
+                    <div>
+                        <Clock location="London" offset={0} />
+                        <Clock location="Kyiv" offset={2} />
+                        <Clock location="New York" offset={-5} />
+                    </div>
+                )}
             </div>
         );
     }
